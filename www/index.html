@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+
+    <title>Hello World</title>
+</head>
+
+<body>
+    <p id="hh"></p>
+    <form id="frm1">
+        <table id="tblinsert">
+            <!-- <tr>
+                <td>ID:</td>
+                <td id="tdorginal"><input type="text" id="tbID" /><span style="color:red">*ID must be unique</span></td>
+                <td id="tdid" style="display:none">
+                    <select id="ddlid" onchange="myFunction()"></select>
+                </td>
+            </tr> -->
+            <tr id="rowName">
+                <td>Name</td>
+                <td><input type="text" id="tbName" /></td>
+
+            </tr>
+            <tr id="rowLocation">
+                <td>Restaurant Name</td>
+                <td><input type="text" id="tbRestaurantName" /></td>
+            </tr>
+            <tr>
+
+            </tr>
+        </table>
+    </form>
+    <br />
+    <button id="submit" onclick="insertData()" style="color:green;display:block">Submit</button>
+    <button id="btnupdate" onclick="updte()" style="color:blue;display:none">Update</button>
+    <button id="btndel" onclick="del()" style="color:red;display:none">Delete</button>
+
+    <br /><br />
+    <button id="btnupdateshw" onclick="showupdte()" style="color:red">update Employee details</button>
+    <button id="btndeleteshw" onclick="showdel()" style="color:blue">Delete Employee details</button>
+    <button id="btninsertshw" onclick="showin()" style="color:green;display:none">save Employee details</button>
+    <br /><br />
+    <table id="tblGrid" cellpadding="10px" cellspacing="0" border="1">
+        <tr style="background-color:black;color:white;font-size:18px;">
+            <!-- <td>
+                ID
+            </td> -->
+            <td>
+                Name
+            </td>
+            <td>
+                Location
+            </td>
+        </tr>
+    </table>
+    <br />
+
+    <!-- Script -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <!-- Script -->
+</body>
+
+</html>
