@@ -107,6 +107,10 @@ h1 {
     display: none;
 }
 
+.fa.fa-star.checked {
+    color: #c3c318
+}
+
 @keyframes fade {
     from {
         opacity: 1.0;

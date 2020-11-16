@@ -7,6 +7,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 
@@ -14,54 +15,171 @@
 </head>
 
 <body>
-    <p id="hh"></p>
-    <form id="frm1">
-        <table id="tblinsert">
-            <!-- <tr>
-                <td>ID:</td>
-                <td id="tdorginal"><input type="text" id="tbID" /><span style="color:red">*ID must be unique</span></td>
-                <td id="tdid" style="display:none">
-                    <select id="ddlid" onchange="myFunction()"></select>
-                </td>
-            </tr> -->
-            <tr id="rowName">
-                <td>Name</td>
-                <td><input type="text" id="tbName" /></td>
+    <!-- Start of first page -->
+    <div data-role="page" id="foo">
+        <div data-role="header">
+            <h1>i-Rate</h1>
+        </div>
+        <!-- /header -->
 
-            </tr>
-            <tr id="rowLocation">
-                <td>Restaurant Name</td>
-                <td><input type="text" id="tbRestaurantName" /></td>
-            </tr>
-            <tr>
+        <div role="main" class="ui-content">
+            <p id="hh"></p>
+            <form id="frm1">
+                <table id="tblinsert">
+                    <!-- <tr>
+                        <td>ID:</td>
+                        <td id="tdorginal"><input type="text" id="tbID" /><span style="color:red">*ID must be unique</span></td>
+                        <td id="tdid" style="display:none">
+                            <select id="ddlid" onchange="myFunction()"></select>
+                        </td>
+                    </tr> -->
+                    <tr id="rowName">
+                        <td>Name</td>
+                        <td><input type="text" id="tbName" /></td>
+                    </tr>
+                    <tr id="rowRestaurantName">
+                        <td>Restaurant Name</td>
+                        <td><input type="text" id="tbRestaurantName" /></td>
+                    </tr>
+                    <tr id="rowRestaurantType">
+                        <td>Restaurant Type</td>
+                        <td>
+                            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <input type="radio" name="type" id="radio-choice-c" value="grill" checked="checked" />
+                                <label for="radio-choice-c">Grill</label>
+                                <input type="radio" name="type" id="radio-choice-d" value="fastfood" />
+                                <label for="radio-choice-d">Fast Food</label>
+                                <input type="radio" name="type" id="radio-choice-e" value="seefood" />
+                                <label for="radio-choice-e">See Food</label>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <tr id="rowDate">
+                        <td>Accessed Date</td>
+                        <td><input type="date" name="date" id="tbDate" /></td>
+                    </tr>
+                    <tr id="rowPrice">
+                        <td>Average meal price per one</td>
+                        <td><input type="text" id="tbPrice" /></td>
+                    </tr>
+                    <tr id="rowService">
+                        <td>Service rating</td>
+                        <td>
+                            <select name="select-choice-mini" id="tbService" data-mini="true" data-inline="true">
+                      
+                                <option value="0">Need to improve</option>
+                      
+                                <option value="1">Okay</option>
+                                    
+                                <option value="2">Good</option>
+                                    
+                                <option value="3">Excellent</option>
+                </select>
+                        </td>
+                    </tr>
+                    <tr id="rowService">
+                        <td>Cleanliness rating</td>
+                        <td>
+                            <select name="select-choice-mini" id="tbCleanliness" data-mini="true" data-inline="true">
+                      
+                                <option value="0">Need to improve</option>
+                      
+                                <option value="1">Okay</option>
+                                    
+                                <option value="2">Good</option>
+                                    
+                                <option value="3">Excellent</option>
+                </select>
+                        </td>
+                    </tr>
+                    <tr id="rowService">
+                        <td>Food quality rating</td>
+                        <td>
+                            <select name="select-choice-mini" id="tbFoodquality" data-mini="true" data-inline="true">
+                      
+                  <option value="0">Need to improve</option>
+                      
+                  <option value="1">Okay</option>
+                      
+                  <option value="2">Good</option>
+                      
+                  <option value="3">Excellent</option>
+                </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Comment</td>
+                        <td>
+                            <textarea cols="40" rows="8" name="textarea" id="tbComment"></textarea>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </table>
+            </form>
+            <br />
+            <button id="submit" onclick="insertData()" style="color: green; display: block">
+          Submit
+        </button>
+            <button id="btnupdate" onclick="updte()" style="color: blue; display: none">
+          Update
+        </button>
+            <button id="btndel" onclick="del()" style="color: red; display: none">
+          Delete
+        </button>
+            <p>Detail rating<a href="#bar">Show details</a></p>
+        </div>
+        <!-- /content -->
 
-            </tr>
-        </table>
-    </form>
-    <br />
-    <button id="submit" onclick="insertData()" style="color:green;display:block">Submit</button>
-    <button id="btnupdate" onclick="updte()" style="color:blue;display:none">Update</button>
-    <button id="btndel" onclick="del()" style="color:red;display:none">Delete</button>
+        <div data-role="footer">
+            <h4>Page Footer</h4>
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page -->
 
-    <br /><br />
-    <button id="btnupdateshw" onclick="showupdte()" style="color:red">update Employee details</button>
-    <button id="btndeleteshw" onclick="showdel()" style="color:blue">Delete Employee details</button>
-    <button id="btninsertshw" onclick="showin()" style="color:green;display:none">save Employee details</button>
-    <br /><br />
-    <table id="tblGrid" cellpadding="10px" cellspacing="0" border="1">
-        <tr style="background-color:black;color:white;font-size:18px;">
-            <!-- <td>
-                ID
-            </td> -->
-            <td>
-                Name
-            </td>
-            <td>
-                Location
-            </td>
-        </tr>
-    </table>
-    <br />
+    <!-- Start of second page -->
+    <div data-role="page" id="bar">
+
+        <div data-role="header">
+            <h1>Bar</h1>
+        </div>
+        <!-- /header -->
+        <div role="main" class="ui-content">
+            <table id="tblGrid" data-role="table" data-mode="reflow" class="ui-responsive">
+                <thead>
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            RestaurantName
+                        </td>
+                        <td>
+                            RestaurantType
+                        </td>
+                        <td>
+                            AccessedDate
+                        </td>
+                        <td>
+                            Rating
+                        </td>
+                        <td>
+                            Comments
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <br>
+            <p><a href="#foo">Back to foo</a></p>
+        </div>
+        <!-- /content -->
+
+        <div data-role="footer">
+            <h4>Page Footer</h4>
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page -->
 
     <!-- Script -->
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>

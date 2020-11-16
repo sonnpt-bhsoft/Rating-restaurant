@@ -39,39 +39,52 @@ var app = {
     receivedEvent: function(id) {},
 };
 
-var Database_Name = 'MyDatabase';
+var Database_Name = 'Testttttt';
 var Version = 1.0;
 var Text_Description = 'My First Web-SQL Example';
 var Database_Size = 2 * 1024 * 1024;
 var dbObj = openDatabase(Database_Name, Version, Text_Description, Database_Size);
-dbObj.transaction(function(tx) {
 
-    tx.executeSql('CREATE TABLE IF NOT EXISTS Employee1(id INTEGER PRIMARY KEY AUTOINCREMENT, Name, Restaurant_Name)');
-    alldetails();
+dbObj.transaction(function(tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS iRate(id INTEGER PRIMARY KEY AUTOINCREMENT, Name, RestaurantName, RestaurantType, AccessedDate, Price, AverageRating, Comments)');
+    // tx.executeSql('DROP TABLE Employee_Table');
+
+    // alldetails();
 });
 
 function insertData() {
     var name = document.getElementById("tbName").value;
     var restaurantName = document.getElementById("tbRestaurantName").value;
+    var restaurantType = document.getElementById("radio-choice-c").value;
+    var accessed_date = document.getElementById("tbDate").value;
+    var price = document.getElementById("tbPrice").value;
+    var service = parseInt(document.getElementById("tbService").value);
+    var cleanliness = parseInt(document.getElementById("tbCleanliness").value);
+    var food = parseInt(document.getElementById("tbFoodquality").value);
+    var average = Math.floor((service + cleanliness + food) / 3)
+    var comment = document.getElementById("tbComment").value;
     dbObj.transaction(function(tx) {
-        tx.executeSql('INSERT INTO Employee1(Name, Restaurant_Name) values(?, ?)', [name, restaurantName]);
-        // tx.executeSql('insert into Employee(id, Name, Restaurant_Name) values(' + id + '","' + name + '","' + restaurantName + ')');
+        tx.executeSql("INSERT INTO iRate(Name, RestaurantName, RestaurantType, AccessedDate, Price, AverageRating, Comments) VALUES (?, ?, ?, ?, ?, ?, ?)", [name, restaurantName, restaurantType, accessed_date, price, average, comment]);
     });
     alldetails();
 }
 
 function alldetails() {
     dbObj.transaction(function(tx) {
-        tx.executeSql('SELECT * from Employee1 ', [], function(tx, results) {
-            var len = results.rows.length,
-                i;
-            // document.getElementById("tblGrid").innerHTML = '';  
+        tx.executeSql('SELECT * from iRate', [], function(tx, results) {
+            var len = results.rows.length
             $("#tblGrid").find("tr:gt(0)").remove();
             var str = '';
-            for (i = 0; i < len; i++) {
+            for (var i = 0; i < len; i++) {
                 str += "<tr>";
                 str += "<td>" + results.rows.item(i).Name + "</td>";
-                str += "<td>" + results.rows.item(i).Restaurant_Name + "</td>";
+                str += "<td>" + results.rows.item(i).RestaurantName + "</td>";
+                str += "<td>" + results.rows.item(i).RestaurantType + "</td>";
+                str += "<td>" + results.rows.item(i).AccessedDate + "</td>";
+                str += "<td>" + (results.rows.item(i).AverageRating === 1 ?
+                    "<span class='fa fa-star checked'>" :
+                    results.rows.item(i).AverageRating === 2 ? "<span class='fa fa-star checked'><span class='fa fa-star checked'>" : "<span class='fa fa-star checked'><span class='fa fa-star checked'><span class='fa fa-star checked'>") + "</td>";
+                str += "<td>" + results.rows.item(i).Comments + "</td>";
                 str += "</tr>";
                 document.getElementById("tblGrid").innerHTML += str;
                 str = '';
