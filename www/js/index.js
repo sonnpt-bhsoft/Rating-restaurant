@@ -1,21 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 var app = {
     // Application Constructor
     initialize: function() {
@@ -47,9 +29,9 @@ var dbObj = openDatabase(Database_Name, Version, Text_Description, Database_Size
 
 dbObj.transaction(function(tx) {
     tx.executeSql('CREATE TABLE IF NOT EXISTS iRate(id INTEGER PRIMARY KEY AUTOINCREMENT, Name, RestaurantName, RestaurantType, AccessedDate, Price, AverageRating, Comments)');
-    // tx.executeSql('DROP TABLE Employee_Table');
+    // tx.executeSql('DROP TABLE iRate');
 
-    // alldetails();
+    alldetails();
 });
 
 function insertData() {
@@ -65,31 +47,31 @@ function insertData() {
     var comment = document.getElementById("tbComment").value;
     dbObj.transaction(function(tx) {
         tx.executeSql("INSERT INTO iRate(Name, RestaurantName, RestaurantType, AccessedDate, Price, AverageRating, Comments) VALUES (?, ?, ?, ?, ?, ?, ?)", [name, restaurantName, restaurantType, accessed_date, price, average, comment]);
+        // tx.executeSql('DROP TABLE if exists iRate')
     });
     alldetails();
 }
+
 
 function alldetails() {
     dbObj.transaction(function(tx) {
         tx.executeSql('SELECT * from iRate', [], function(tx, results) {
             var len = results.rows.length
-            $("#tblGrid").find("tr:gt(0)").remove();
-            var str = '';
             for (var i = 0; i < len; i++) {
-                str += "<tr>";
-                str += "<td>" + results.rows.item(i).Name + "</td>";
-                str += "<td>" + results.rows.item(i).RestaurantName + "</td>";
-                str += "<td>" + results.rows.item(i).RestaurantType + "</td>";
-                str += "<td>" + results.rows.item(i).AccessedDate + "</td>";
-                str += "<td>" + (results.rows.item(i).AverageRating === 1 ?
-                    "<span class='fa fa-star checked'>" :
-                    results.rows.item(i).AverageRating === 2 ? "<span class='fa fa-star checked'><span class='fa fa-star checked'>" : "<span class='fa fa-star checked'><span class='fa fa-star checked'><span class='fa fa-star checked'>") + "</td>";
-                str += "<td>" + results.rows.item(i).Comments + "</td>";
-                str += "</tr>";
-                document.getElementById("tblGrid").innerHTML += str;
-                str = '';
+                $('#list').append(
+                    "<li>" +
+                    "<h3>" + "Name: " + results.rows.item(i).Name + "</h3>" +
+                    "<p class='topic'>" + "<strong>Restaurant Name: </strong>" + results.rows.item(i).RestaurantName + "</p>" +
+                    "<p>" + "<strong>Restaurant Type: </strong>" + results.rows.item(i).RestaurantType + "</p>" +
+                    "<p>" + "<strong>Accessed Date: </strong>" + results.rows.item(i).AccessedDate + "</p>" +
+                    "<p>" + "<strong>Price: </strong>" + results.rows.item(i).Price + "</p>" +
+                    "<p>" + "<strong>Comment: </strong>" + results.rows.item(i).Comments + "</p>" +
+                    "<p class='ui-li-aside'><strong>" + "Rating: " + (results.rows.item(i).AverageRating === 1 ?
+                        "<span class='fa fa-star checked'>" :
+                        results.rows.item(i).AverageRating === 2 ? "<span class='fa fa-star checked'><span class='fa fa-star checked'>" : "<span class='fa fa-star checked'><span class='fa fa-star checked'><span class='fa fa-star checked'>") + "</strong></p>" +
+                    "</li>"
+                )
             }
-        }, null);
-    });
-
+        })
+    })
 }
